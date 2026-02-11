@@ -1,6 +1,4 @@
 class DevCorsMiddleware
-  ALLOWED_ORIGIN = "http://localhost:5173".freeze
-
   def initialize(app)
     @app = app
   end
@@ -12,7 +10,7 @@ class DevCorsMiddleware
 
     status, headers, body = @app.call(env)
     origin = env["HTTP_ORIGIN"]
-    if origin == ALLOWED_ORIGIN
+    if origin == allowed_origin
       headers.merge!(cors_headers(origin))
     end
     [ status, headers, body ]
@@ -20,9 +18,13 @@ class DevCorsMiddleware
 
   private
 
+  def allowed_origin
+    ENV.fetch("FRONTEND_ORIGIN", "http://localhost:5173")
+  end
+
   def cors_headers(origin)
     {
-      "Access-Control-Allow-Origin" => origin || ALLOWED_ORIGIN,
+      "Access-Control-Allow-Origin" => origin || allowed_origin,
       "Access-Control-Allow-Methods" => "GET, POST, PUT, PATCH, DELETE, OPTIONS",
       "Access-Control-Allow-Headers" => "Content-Type, Authorization",
       "Access-Control-Max-Age" => "1728000"

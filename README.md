@@ -7,6 +7,16 @@ This project is now split into:
 
 ## Run With Docker Compose
 
+Create env files (or use the included defaults):
+
+```bash
+cp .env.backend.example .env.backend
+cp .env.frontend.example .env.frontend
+```
+
+Set `RAILS_MASTER_KEY` in `.env.backend` from `/Users/nick/Development/railsPractice/demo-app/recipe/config/master.key`.
+Set `DEVISE_JWT_SECRET_KEY` in `.env.backend` to a long random secret for JWT signing.
+
 ```bash
 docker compose up --build
 ```

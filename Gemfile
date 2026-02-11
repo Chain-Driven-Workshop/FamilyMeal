@@ -12,6 +12,8 @@ gem "puma", ">= 5.0"
 gem "jbuilder"
 # Devise is a flexible authentication solution for Rails based on Warden [https://github.com/heartcombo/devise]
 gem "devise"
+gem "devise-jwt"
+gem "rack-cors"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 

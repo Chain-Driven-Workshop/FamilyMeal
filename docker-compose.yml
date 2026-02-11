@@ -2,8 +2,8 @@ services:
   db:
     image: postgres:18.1
     restart: always
-    environment:
-      POSTGRES_PASSWORD: password
+    env_file:
+      - .env.backend
     volumes:
        - postgres_data:/var/lib/postgresql
     ports:
@@ -18,11 +18,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    environment:
-      - DATABASE_HOST=db
-      - POSTGRES_PASSWORD=password
-      - RAILS_ENV=development
-      - RACK_ENV=development
+    env_file:
+      - .env.backend
 
   frontend:
     build:
@@ -37,8 +34,8 @@ services:
       - "5173:5173"
     depends_on:
       - web
-    environment:
-      - VITE_API_PROXY_TARGET=http://web:3000
+    env_file:
+      - .env.frontend
 
 volumes:
   postgres_data: 
