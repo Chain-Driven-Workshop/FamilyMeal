@@ -23,5 +23,8 @@ module Recipe
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Backend-only Rails app; frontend lives in Vite + React.
+    config.api_only = true
   end
 end

@@ -8,3 +8,84 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+  --font-header: "Inter";
+  --font-nav: "Inter";
+  --font-body: "Inter";
+  --color-text: #111827;
+  --color-text-header: #02329a;
+  --color-text-inverse: #ffffff;
+  --color-accent: #22c55e;
+  --color-overlay: rgba(0, 0, 0, 0.45);
+  --color-nav-link: #ffffff;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1 {
+  color: var(--color-text-header);
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-header);
+}
+
+.landing {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing__overlay {
+  background: var(--color-overlay);
+  padding: 24px 32px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.landing h1 {
+  color: var(--color-text-inverse);
+  font-size: 48px;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.landing__image-test {
+  margin-top: 16px;
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.site-layout {
+  min-height: 100vh;
+  margin: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.site-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+}
+
+.site-nav__links a {
+  font-family: var(--font-nav);
+  color: var(--color-nav-link);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}

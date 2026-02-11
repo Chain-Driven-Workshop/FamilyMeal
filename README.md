@@ -1,24 +1,54 @@
-# README
+# Recipe: Rails API + Vite React
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is now split into:
 
-Things you may want to cover:
+- Rails backend API in this repository root.
+- React frontend in `frontend/` powered by Vite.
 
-* Ruby version
+## Run With Docker Compose
 
-* System dependencies
+```bash
+docker compose up --build
+```
 
-* Configuration
+Services:
 
-* Database creation
+- Rails API: `http://localhost:3000`
+- React frontend: `http://localhost:5173`
+- Postgres: `localhost:5432`
 
-* Database initialization
+Health endpoint from backend:
 
-* How to run the test suite
+- `GET http://localhost:3000/api/v1/health`
 
-* Services (job queues, cache servers, search engines, etc.)
+The frontend container proxies `/api/*` calls to the Rails container.
+Frontend dependencies are baked into `frontend/Dockerfile` and cached by image/layer.
 
-* Deployment instructions
+## Run Without Docker
 
-* ...
+Backend:
+
+1. Install gems:
+   ```bash
+   bundle install
+   ```
+2. Set up the database:
+   ```bash
+   bin/rails db:prepare
+   ```
+3. Start Rails API:
+   ```bash
+   bin/rails server
+   ```
+
+Frontend:
+
+1. Install dependencies:
+   ```bash
+   cd frontend
+   npm install
+   ```
+2. Start Vite:
+   ```bash
+   npm run dev
+   ```

@@ -19,8 +19,27 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_HOUST=db
-      - POSTGRESS_PASSWORD=password
+      - DATABASE_HOST=db
+      - POSTGRES_PASSWORD=password
+      - RAILS_ENV=development
+      - RACK_ENV=development
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    working_dir: /app/frontend
+    command: npm run dev -- --host 0.0.0.0 --port 5173
+    volumes:
+      - ./frontend:/app/frontend
+      - frontend_node_modules:/app/frontend/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - web
+    environment:
+      - VITE_API_PROXY_TARGET=http://web:3000
 
 volumes:
   postgres_data: 
+  frontend_node_modules:
