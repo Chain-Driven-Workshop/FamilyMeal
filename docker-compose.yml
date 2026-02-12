@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: frontend/Dockerfile
     working_dir: /app/frontend
-    command: npm run dev -- --host 0.0.0.0 --port 5173
+    command: sh -c "npm install --include=dev && npm run dev -- --host 0.0.0.0 --port 5173"
     volumes:
       - ./frontend:/app/frontend
       - frontend_node_modules:/app/frontend/node_modules

@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
+import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen'
 
-type HealthResponse = {
-  status: string;
-  service?: string;
-};
+const router = createRouter({ routeTree })
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
 
 export default function App() {
-  const [result, setResult] = useState<HealthResponse>({ status: "loading" });
-
-  useEffect(() => {
-    fetch("/api/v1/health")
-      .then((response) => response.json() as Promise<HealthResponse>)
-      .then((data) => setResult(data))
-      .catch(() => setResult({ status: "error", service: "recipe-api" }));
-  }, []);
-
-  return (
-    <main className="app-shell">
-      <h1>Recipe Frontend</h1>
-      <p>React app running on Vite.</p>
-      <pre>{JSON.stringify(result, null, 2)}</pre>
-    </main>
-  );
+  return <RouterProvider router={router} />
 }
