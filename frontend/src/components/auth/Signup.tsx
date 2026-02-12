@@ -3,7 +3,7 @@ import api from '../../api/axios';
 import { AuthResponse } from '../../types/auth';
 
 type SignupProps = {
-  onSuccess?: () => void;
+  onSuccess?: (token: string) => void;
 };
 
 export const Signup = ({ onSuccess }: SignupProps) => {
@@ -32,7 +32,7 @@ export const Signup = ({ onSuccess }: SignupProps) => {
       const token = response.headers.authorization;
       if (token) {
         localStorage.setItem('token', token);
-        onSuccess?.();
+        onSuccess?.(token);
       }
     } catch (err: unknown) {
       const message =

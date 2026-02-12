@@ -1,11 +1,17 @@
 import { Link, Outlet, useNavigate } from '@tanstack/react-router'
+import api from '../../api/axios'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { clearAuth } from '../../store/authSlice'
 
 export function RootLayout() {
   const navigate = useNavigate()
-  const isAuthenticated = Boolean(localStorage.getItem('token'))
+  const dispatch = useAppDispatch()
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
   const handleLogout = () => {
+    void api.delete('/logout').catch(() => undefined)
     localStorage.removeItem('token')
+    dispatch(clearAuth())
     void navigate({ to: '/login', replace: true })
   }
 

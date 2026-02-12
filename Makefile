@@ -12,3 +12,7 @@ sh:
 
 rails:
 	docker compose run --rm web bundle exec rails c
+
+db.migrate:
+	docker compose run --rm web bundle exec rake db:migrate
+	

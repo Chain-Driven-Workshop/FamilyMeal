@@ -1,11 +1,18 @@
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { Login } from '../components/auth/Login'
+import { store } from '../store'
+import { setToken, validateToken } from '../store/authSlice'
 
 export const Route = createFileRoute('/login')({
-  beforeLoad: () => {
-    const token = localStorage.getItem('token')
+  beforeLoad: async () => {
+    const token = store.getState().auth.token
     if (token) {
-      throw redirect({ to: '/dashboard' })
+      try {
+        await store.dispatch(validateToken()).unwrap()
+        throw redirect({ to: '/dashboard' })
+      } catch {
+        // Token exists but is invalid; stay on login.
+      }
     }
   },
   component: RouteComponent,
@@ -16,7 +23,8 @@ function RouteComponent() {
 
   return (
     <Login
-      onSuccess={() => {
+      onSuccess={(token) => {
+        store.dispatch(setToken(token))
         void navigate({ to: '/dashboard', replace: true })
       }}
     />
