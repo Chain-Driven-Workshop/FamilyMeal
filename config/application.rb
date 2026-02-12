@@ -26,5 +26,7 @@ module Recipe
 
     # Backend-only Rails app; frontend lives in Vite + React.
     config.api_only = true
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_your_app_session'
   end
 end
