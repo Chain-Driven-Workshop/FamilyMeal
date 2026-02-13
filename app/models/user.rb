@@ -7,7 +7,6 @@ class User < ApplicationRecord
   # Associations #######################################################
   has_many :user_recipes, :dependent => :destroy
   has_many :recipes, :through => :user_recipes
-  k
   has_many :user_ingredients, :dependent => :destroy
   has_many :ingredients, :through => :user_ingredients
 
