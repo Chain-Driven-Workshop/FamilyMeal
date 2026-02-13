@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "health", to: "health#show"
       get "auth", to: "auth#show"
+      
+      resources :recipes, :only => [:index, :show, :create, :update, :destroy]
     end
   end
 end

@@ -5,8 +5,9 @@ class User < ApplicationRecord
   before_validation :ensure_jti
 
   # Associations #######################################################
-  has_many :user_recipies, :dependent => :destroy
-  has_many :recipies, :through => :user_recipies
+  has_many :user_recipes, :dependent => :destroy
+  has_many :recipes, :through => :user_recipes
+  k
   has_many :user_ingredients, :dependent => :destroy
   has_many :ingredients, :through => :user_ingredients
 
