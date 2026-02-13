@@ -4,6 +4,12 @@ class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
   before_validation :ensure_jti
 
+  # Associations #######################################################
+  has_many :user_recipies, :dependent => :destroy
+  has_many :recipies, :through => :user_recipies
+  has_many :user_ingredients, :dependent => :destroy
+  has_many :ingredients, :through => :user_ingredients
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
