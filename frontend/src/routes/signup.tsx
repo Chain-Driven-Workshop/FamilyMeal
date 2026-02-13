@@ -1,4 +1,5 @@
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
+import { Box } from '@mui/material'
 import { Signup } from '../components/auth/Signup'
 import { store } from '../store'
 import { setToken, validateToken } from '../store/authSlice'
@@ -22,11 +23,16 @@ function RouteComponent() {
   const navigate = useNavigate()
 
   return (
-    <Signup
-      onSuccess={(token) => {
-        store.dispatch(setToken(token))
-        void navigate({ to: '/dashboard', replace: true })
-      }}
-    />
+    <Box
+      className="external-page"
+      sx={{ minHeight: 'calc(100vh - 57px)', display: 'flex', alignItems: 'center', px: 2 }}
+    >
+      <Signup
+        onSuccess={(token) => {
+          store.dispatch(setToken(token))
+          void navigate({ to: '/dashboard', replace: true })
+        }}
+      />
+    </Box>
   )
 }

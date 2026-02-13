@@ -1,4 +1,5 @@
-import { Link, Outlet, useNavigate } from '@tanstack/react-router'
+import { Link as RouterLink, Outlet, useNavigate } from '@tanstack/react-router'
+import { Box, Button, Divider, Stack } from '@mui/material'
 import api from '../../api/axios'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { clearAuth } from '../../store/authSlice'
@@ -17,28 +18,28 @@ export function RootLayout() {
 
   return (
     <>
-      <div className="p-2 flex gap-2">
+      <Box sx={{ px: 2, py: 1.5 }}>
         {isAuthenticated ? (
-          <>
-            <Link to="/dashboard" className="[&.active]:font-bold">
+          <Stack direction="row" spacing={1.5}>
+            <Button component={RouterLink} to="/dashboard" variant="text">
               Dashboard
-            </Link>
-            <button type="button" onClick={handleLogout}>
+            </Button>
+            <Button type="button" onClick={handleLogout} variant="outlined" color="inherit">
               Logout
-            </button>
-          </>
+            </Button>
+          </Stack>
         ) : (
-          <>
-            <Link to="/login" className="[&.active]:font-bold">
+          <Stack direction="row" spacing={1.5}>
+            <Button component={RouterLink} to="/login" variant="text">
               Login
-            </Link>
-            <Link to="/signup" className="[&.active]:font-bold">
+            </Button>
+            <Button component={RouterLink} to="/signup" variant="text">
               Signup
-            </Link>
-          </>
+            </Button>
+          </Stack>
         )}
-      </div>
-      <hr />
+      </Box>
+      <Divider />
       <Outlet />
     </>
   )

@@ -27,3 +27,7 @@ pre {
   padding: 1rem;
   overflow-x: auto;
 }
+
+.external-page {
+  background-image: url('background.png');
+}

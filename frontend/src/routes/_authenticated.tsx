@@ -4,6 +4,10 @@ import { clearAuth, validateToken } from '../store/authSlice'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: async ({ location }) => {
+    if (location.pathname === '/') {
+      return
+    }
+
     const token = store.getState().auth.token
     if (!token) {
       throw redirect({
@@ -24,10 +28,6 @@ export const Route = createFileRoute('/_authenticated')({
           redirect: location.href,
         },
       })
-    }
-
-    if (location.pathname === '/') {
-      throw redirect({ to: '/dashboard' })
     }
   },
   component: () => <Outlet />,
