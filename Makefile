@@ -16,3 +16,5 @@ rails:
 db.migrate:
 	docker compose run --rm web bundle exec rake db:migrate
 	
+db.rollback:
+	docker compose run --rm web bundle exec rake db:rollback
