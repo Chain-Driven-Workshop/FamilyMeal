@@ -1,11 +1,10 @@
 class CreateUserRecipes < ActiveRecord::Migration[8.1]
   def change
     create_table :user_recipes do |t|
-      t.timestamps
-      t.integer :user_id
-      t.integer :recipe_id
-    end
+      t.references :user, null: false, foreign_key: true
+      t.references :recipe, null: false, foreign_key: true
 
-    add_index :user_recipes, [:user_id, :recipe_id], unique: true
+      t.timestamps
+    end
   end
 end
